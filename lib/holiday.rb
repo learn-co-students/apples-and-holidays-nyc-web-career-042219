@@ -1,5 +1,4 @@
 require 'pry'
-
 def second_supply_for_fourth_of_july(holiday_hash)
   # given that holiday_hash looks like this:
   # {
@@ -58,25 +57,24 @@ def all_winter_holiday_supplies(holiday_hash)
 end
 
 def all_supplies_in_holidays(holiday_hash)
-  # iterate through holiday_hash and print items such that your readout resembles:
-  # Winter:
-  #   Christmas: Lights, Wreath
-  #   New Years: Party Hats
-  # Summer:
-  #   Fourth Of July: Fireworks, BBQ
-  # etc.
-
+  # iterate through holiday_hash and print items
+  holiday_hash.each do |season, holiday_name|
+    puts "#{season.to_s.capitalize}:"
+    holiday_name.each do |holiday_name, item_array|
+      str_holiday_name = holiday_name.to_s.split("_").collect {|word| word.capitalize!}.join(" ")
+      puts "  #{str_holiday_name}: #{item_array.join(", ")}"
+end
+end
 end
 
 def all_holidays_with_bbq(holiday_hash)
   # return an array of holiday names (as symbols) where supply lists
   # include the string "BBQ"
-
+  holiday_hash.map do |season, holiday_name|
+    holiday_name.map do |holiday_name, item_array|
+      if item_array.include?("BBQ")
+        holiday_name
+      end
+    end
+  end.flatten.compact
 end
-
-
-
-
-
-
-
